@@ -1,4 +1,4 @@
-# python script for generating figures using seaborn, matplotlib.
+# python script for generating figures using seaborn, matplotlib. Written by WHM for the Campolattaro Lab
 import seaborn as sns
 import pandas as pd 
 import matplotlib.pyplot as plt 
@@ -445,37 +445,69 @@ plot_extinction(male_female_toneoff_data= male_female_toneoff_data,
                  labels= ['Male', 'Female'],
                  base_name= "Tone-off males and females extinction")
 
-# plot tone-on to tone-off males only 
-male_tone_data = male_female_all_data[male_female_all_data['sex'] == 'male'].reset_index(drop=True)
+# plot tone-on and tone-off data
 
-plot_acquisition(male_female_toneoff_data= male_tone_data, 
-                 hue= 'cs_type', style= 'cs_type', 
-                 markers= {'toneon': 'o', 'toneoff': 's'},
-                 labels= ['Tone-On', 'Tone-Off'],
-                 base_name= 'tone-on and tone-off males aquisition')
-
-plot_immediate_generalization(male_female_toneoff_data = male_tone_data,
-                              x_bar= 'cs_type',
-                              x_tick_labels= ['Tone-On', 'Tone-Off'],
-                              order= ['toneon', 'toneoff'],
-                              group_colors= group_colors,
-                              base_name= 'tone-on and tone-off immediate gen')
-
-plot_immediate_gen_blocks(male_female_toneoff_data = male_tone_data, 
-                          hue= 'cs_type', style= 'cs_type', 
-                          markers= {'toneon': 'o', 'toneoff': 's'},
-                          labels= ['Tone-On', 'Tone-Off'],
-                          base_name= 'tone-on and tone-off gen blocks')
-
-plot_general_transfer(male_female_toneoff_data= male_tone_data, 
-                      hue= 'cs_type', style= 'cs_type', 
-                      markers= {'toneon': 'o', 'toneoff': 's'},
-                      labels= ['Tone-On', 'Tone-Off'],
-                      base_name= 'tone-on and tone-off males general transfer')
-
-plot_extinction(male_female_toneoff_data= male_tone_data, 
+plot_acquisition(male_female_toneoff_data= male_female_all_data, 
                  hue= 'cs_type', style= 'cs_type',
                  markers= {'toneon': 'o', 'toneoff': 's'},
-                 labels= ['Tone-On', 'Tone-Off'],
-                 base_name= "tone-on and tone-off males extinction")
-                        
+                 labels= ['Tone On', 'Tone Off'],
+                 base_name= "Tone On and Tone-off males and females acquisition")
+
+plot_immediate_generalization(male_female_toneoff_data= male_female_all_data,
+                              x_bar= 'cs_type',
+                              order= ['toneon', 'toneoff'],
+                              x_tick_labels= ['Tone On', 'Tone Off'],
+                              group_colors= group_colors,
+                              base_name = "Tone on and Tone-off all sex immediate gen")
+
+plot_immediate_gen_blocks(male_female_toneoff_data= male_female_all_data,
+                          hue= 'cs_type', style= 'cs_type',
+                          markers= {'toneon': 'o', 'toneoff': 's'},
+                          labels = ['Tone On', 'Tone Off'],
+                          base_name = 'Tone On and Tone-off males and females immediate gen blocks')
+
+plot_general_transfer(male_female_toneoff_data= male_female_all_data, 
+                 hue= 'cs_type', style= 'cs_type',
+                 markers= {'toneon': 'o', 'toneoff': 's'},
+                 labels= ['Tone On', 'Tone Off'],
+                 base_name= "Tone On and Tone-off males and females general transfer")
+
+plot_extinction(male_female_toneoff_data= male_female_all_data, 
+                 hue= 'cs_type', style= 'cs_type',
+                 markers= {'toneon': 'o', 'toneoff': 's'},
+                 labels= ['Tone On', 'Tone Off'],
+                 base_name= "Tone On and Tone-off males and females extinction")
+
+# plot tone-on data between sex
+toneon_data_all = male_female_all_data[male_female_all_data['cs_type'] == 'toneon'].reset_index(drop=True)
+
+plot_acquisition(male_female_toneoff_data= toneon_data_all, 
+                 hue= 'sex', style= 'sex',
+                 markers= {'male': 'o', 'female': 's'},
+                 labels= ['Male', 'Female'],
+                 base_name= "Tone On males and females acquisition")
+
+plot_immediate_generalization(male_female_toneoff_data= toneon_data_all,
+                              x_bar= 'sex',
+                              order= ['male', 'female'],
+                              x_tick_labels= ['Male', 'Female'],
+                              group_colors= group_colors,
+                              base_name = "Tone on sex immediate gen")
+
+plot_immediate_gen_blocks(male_female_toneoff_data= toneon_data_all,
+                          hue= 'sex', style= 'sex',
+                          markers= {'male': 'o', 'female': 's'},
+                          labels= ['Male', 'Female'],
+                          base_name = 'Tone On males and females immediate gen blocks')
+
+plot_general_transfer(male_female_toneoff_data= toneon_data_all, 
+                      hue= 'sex', style= 'sex',
+                      markers= {'male': 'o', 'female': 's'},
+                      labels= ['Male', 'Female'],
+                      base_name= "Tone On males and females general transfer")
+
+plot_extinction(male_female_toneoff_data= toneon_data_all, 
+                hue= 'sex', style= 'sex',
+                markers= {'male': 'o', 'female': 's'},
+                labels= ['Male', 'Female'],
+                base_name= "Tone-On males and females extinction")
